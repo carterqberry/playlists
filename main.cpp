@@ -4,83 +4,102 @@
 // You could put 'using namespace std;' at the top of your code and not need 'std::' in front of these words,
 // but many people consider it better practice to not have 'using namespace std;'
 
+
 #include <iostream>
 #include <string>
+#include <vector>
 
 //TODO: Include your class files here
 
+
+// TODO: clean up memory when it is no longer used
+//  (you need to find the appropriate places in the code to do this)
+
 std::string GetUserString(const std::string& prompt);
-double GetUserDouble(const std::string& prompt);
 int GetUserInt(const std::string& prompt);
 
 
-
 int main() {
-   std::string customerName = GetUserString("Enter Customer's Name: ");
-   std::string todayDate = GetUserString("Enter Today's Date: ");
+   std::cout << "Welcome to the Firstline Player!  Enter options to see menu options." << std::endl << std::endl;
 
-   //TODO: Create a shopping cart with the above information
-   // .
-   // This should be just one line of code that calls your ShoppingCart constructor
+   //TODO: Create vectors to hold the songs and playlists
 
    std::string userMenuChoice = "none";
    bool continueMenuLoop = true;
+
    while (continueMenuLoop) {
-      userMenuChoice = GetUserString("Enter option: ");
+      userMenuChoice = GetUserString("Enter your selection now: ");
 
       if (userMenuChoice == "add") {
-         std::string itemName = GetUserString("Enter the item name: ");
-         std::string itemDescription = GetUserString("Enter the item description: ");
-         double itemPrice = GetUserDouble("Enter the item price: ");
-         int itemQuantity = GetUserInt("Enter the item quantity: ");
+         const std::string DONE_KEYWORD = "DONE";
+         std::cout << "Enter songs' names and first lines"
+                  << " (type \"" << DONE_KEYWORD << "\" when done):" << std::endl;
 
-         //TODO: Create an item and add it to the shopping cart
-        
-      }
-      else if (userMenuChoice == "remove") {
-         std::string nameOfItemToRemove = GetUserString("Enter name of the item to remove: ");
+         std::string songName = "none";
+         std::string firstLine = "none";
 
-         //TODO: Remove the item from the shopping cart
-         
-      }
-      else if (userMenuChoice == "change") {
-         std::string nameOfItemToChange = GetUserString("Enter the item name: ");
-         int newItemQuantity = GetUserInt("Enter the new quantity: ");
+         songName = GetUserString("Song Name: ");
+         while (songName != DONE_KEYWORD) {
+            firstLine = GetUserString("Song's first line: ");
 
-         //TODO: Change the quantity of the item in the shopping cart
-         
+            //TODO: Create a Song using `songName` and `firstLine` and add it to allSongs
+
+            songName = GetUserString("Song Name: ");
+         }
       }
-      else if (userMenuChoice == "descriptions") {
-         //TODO: Print the information from the shopping cart
-        
+      else if (userMenuChoice == "list") {
+         //TODO: Implement this menu option
       }
-      else if (userMenuChoice == "cart") {
-         //TODO: Print the information from the shopping cart
-         
+      else if (userMenuChoice == "addp") {
+         //TODO: Implement this menu option
+      }
+      else if (userMenuChoice == "addsp") {
+         //TODO: Implement this menu option
+      }
+      else if (userMenuChoice == "listp") {
+         //TODO: Implement this menu option
+      }
+      else if (userMenuChoice == "play") {
+         //TODO: Implement this menu option
+      }
+      else if (userMenuChoice == "remp") {
+         //TODO: Implement this menu option
+      }
+      else if (userMenuChoice == "remsp") {
+         //TODO: Implement this menu option
+      }
+      else if (userMenuChoice == "remsl") {
+         //TODO: Implement this menu option
       }
       else if (userMenuChoice == "options") {
-         std::cout << "MENU" << std::endl
-            << "add - Add item to cart" << std::endl
-            << "remove - Remove item from cart" << std::endl
-            << "change - Change item quantity" << std::endl
-            << "descriptions - Print the items' descriptions" << std::endl
-            << "cart - Print the shopping cart" << std::endl
-            << "options - Print the options menu" << std::endl
-            << "quit - Quit" << std::endl << std::endl;
+         std::cout << "add      Adds a list of songs to the library" << std::endl
+            << "list     Lists all the songs in the library" << std::endl
+            << "addp     Adds a new playlist" << std::endl
+            << "addsp    Adds a song to a playlist" << std::endl
+            << "listp    Lists all the playlists" << std::endl
+            << "play     Plays a playlist" << std::endl
+            << "remp     Removes a playlist" << std::endl
+            << "remsp    Removes a song from a playlist" << std::endl
+            << "remsl    Removes a song from the library (and all playlists)" << std::endl
+            << "options  Prints this options menu" << std::endl
+            << "quit     Quits the program" << std::endl << std::endl;
       }
       else if (userMenuChoice == "quit") {
-         std::cout << "Goodbye." << std::endl;
+         std::cout << "Goodbye!" << std::endl;
          continueMenuLoop = false;
       }
       else {
-         std::cout << "MENU" << std::endl
-            << "add - Add item to cart" << std::endl
-            << "remove - Remove item from cart" << std::endl
-            << "change - Change item quantity" << std::endl
-            << "descriptions - Print the items' descriptions" << std::endl
-            << "cart - Print the shopping cart" << std::endl
-            << "options - Print the options menu" << std::endl
-            << "quit - Quit" << std::endl << std::endl;
+         std::cout << "add      Adds a list of songs to the library" << std::endl
+            << "list     Lists all the songs in the library" << std::endl
+            << "addp     Adds a new playlist" << std::endl
+            << "addsp    Adds a song to a playlist" << std::endl
+            << "listp    Lists all the playlists" << std::endl
+            << "play     Plays a playlist" << std::endl
+            << "remp     Removes a playlist" << std::endl
+            << "remsp    Removes a song from a playlist" << std::endl
+            << "remsl    Removes a song from the library (and all playlists)" << std::endl
+            << "options  Prints this options menu" << std::endl
+            << "quit     Quits the program" << std::endl << std::endl;
       }
    }
 
@@ -96,15 +115,6 @@ std::string GetUserString(const std::string& prompt) {
    std::cout << std::endl;
    return userAnswer;
 }
-double GetUserDouble(const std::string& prompt) {
-   double userAnswer = 0.0;
-
-   std::cout << prompt;
-   std::cin >> userAnswer;
-   std::cin.ignore();
-   std::cout << std::endl;
-   return userAnswer;
-}
 int GetUserInt(const std::string& prompt) {
    int userAnswer = 0;
 
@@ -114,3 +124,4 @@ int GetUserInt(const std::string& prompt) {
    std::cout << std::endl;
    return userAnswer;
 }
+
